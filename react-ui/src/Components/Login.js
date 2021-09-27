@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
@@ -104,7 +103,7 @@ export default function Login() {
             onChange={handlePasswordChange}
           />
           <div id="radioButtons">
-            <div class="inputBox">
+            <div className="inputBox">
               <input
                 type="radio"
                 value="teacher"
@@ -114,7 +113,7 @@ export default function Login() {
               />{" "}
               Teacher
             </div>
-            <div class="inputBox">
+            <div className="inputBox">
               <input
                 type="radio"
                 value="student"
@@ -128,7 +127,7 @@ export default function Login() {
 
           <button
             id="logInButton"
-            class="button-66"
+            className="button-66"
             type="submit"
             onClick={handleLogin}>
             Log In
@@ -136,7 +135,7 @@ export default function Login() {
 
           {checkedOption === "teacher" ? (
             <button
-              class="button-66"
+              className="button-66"
               id="registerButton"
               type="submit"
               onClick={handleRegister}>

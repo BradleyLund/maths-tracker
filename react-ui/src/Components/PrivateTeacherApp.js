@@ -1,9 +1,8 @@
 import "../App.css";
 import React from "react";
 import axios from "axios";
-import Button from "@material-ui/core/Button";
 
-class PrivateApp extends React.Component {
+class PrivateTeacherApp extends React.Component {
   constructor(props) {
     super(props);
 
@@ -45,12 +44,12 @@ class PrivateApp extends React.Component {
   render() {
     return (
       <div>
-        <Button color="primary" variant="contained" onClick={this.handleLogout}>
+        <button className="button-66" onClick={this.handleLogout}>
           Log out
-        </Button>
+        </button>
       </div>
     );
   }
 }
 
-export default PrivateApp;
+export default PrivateTeacherApp;

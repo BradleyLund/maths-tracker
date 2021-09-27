@@ -7,17 +7,17 @@ const jwt = require("jsonwebtoken");
 
 // create a subschema for the todo list array, this will allow us to save the todolist item and let it have an id for deleting
 let studentSubSchema = mongoose.Schema({
-  todoDescription: String,
+  studentID: String,
 });
 
-let UserSchema = mongoose.Schema({
+let TeacherSchema = mongoose.Schema({
   username: String,
   password: String,
   studentsArray: [studentSubSchema],
 });
 
-UserSchema.pre("save", function (next) {
-  const user = this;
+TeacherSchema.pre("save", function (next) {
+  const teacher = this;
 
   if (this.isModified("password") || this.isNew) {
     bcrypt.genSalt(10, function (saltError, salt) {
@@ -25,13 +25,13 @@ UserSchema.pre("save", function (next) {
         console.log(saltError);
         return next(saltError);
       } else {
-        bcrypt.hash(user.password, salt, function (hashError, hash) {
+        bcrypt.hash(teacher.password, salt, function (hashError, hash) {
           if (hashError) {
             console.log(hashError);
             return next(hashError);
           }
 
-          user.password = hash;
+          teacher.password = hash;
           next();
         });
       }
@@ -41,7 +41,7 @@ UserSchema.pre("save", function (next) {
   }
 });
 
-UserSchema.methods.comparePassword = function (password, callback) {
+TeacherSchema.methods.comparePassword = function (password, callback) {
   bcrypt.compare(password, this.password, function (error, isMatch) {
     if (error) {
       return callback(error);
@@ -51,12 +51,13 @@ UserSchema.methods.comparePassword = function (password, callback) {
   });
 };
 
-UserSchema.methods.getSignedJwtToken = function () {
+TeacherSchema.methods.getSignedJwtToken = function () {
   return jwt.sign(
-    JSON.stringify({ username: this.username }),
+    // added the isTeacher boolean into the auth token, this might change the expected output of the auth function in the controller
+    JSON.stringify({ username: this.username, isTeacher: true }),
     process.env.ACCESS_TOKEN_SECRET,
     { algorithm: "HS256" }
   );
 };
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports = mongoose.model("Teachers", TeacherSchema);
