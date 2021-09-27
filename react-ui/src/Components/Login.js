@@ -7,25 +7,25 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   paper: {
+//     marginTop: theme.spacing(8),
+//     display: "flex",
+//     flexDirection: "column",
+//     alignItems: "center",
+//   },
+//   avatar: {
+//     margin: theme.spacing(1),
+//     backgroundColor: theme.palette.secondary.main,
+//   },
+//   form: {
+//     width: "100%", // Fix IE 11 issue.
+//     marginTop: theme.spacing(1),
+//   },
+//   submit: {
+//     margin: theme.spacing(3, 0, 2),
+//   },
+// }));
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -81,16 +81,17 @@ export default function Login() {
       );
   };
 
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
+      <div>
+        {/* className={classes.paper} */}
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form noValidate>
+          {/* className={classes.form} */}
           <TextField
             variant="outlined"
             margin="normal"
@@ -124,20 +125,22 @@ export default function Login() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
             onClick={handleLogin}>
             Log In
           </Button>
+          {/* 
+            className={classes.submit}
+           */}
           <Button
             id="registerButton"
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
             onClick={handleRegister}>
             Register
           </Button>
+          {/* className={classes.submit} */}
         </form>
       </div>
     </Container>
