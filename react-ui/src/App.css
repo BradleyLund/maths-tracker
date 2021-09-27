@@ -1,36 +1,10 @@
-#todoCard {
-  display: flex;
+#loginPage {
+  display:  flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  margin-top: 5rem;
-  border: 1px solid black;
-  width: 36rem;
-  border-radius: 3px;
-  padding-bottom: 30px;
 }
 
-#parentDiv {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.signinButton {
+  margin-top: 20px;
 }
-
-
-.todoItem  {
-  margin: 10px;
-  width: 18rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-#inputFormDiv {
-  width:18rem;
-
-  display: flex;
-  justify-content: space-between;
-
-  margin-top: 15px;
-}
-

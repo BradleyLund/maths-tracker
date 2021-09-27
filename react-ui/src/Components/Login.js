@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 
@@ -22,51 +19,58 @@ export default function Login() {
   const handleRegister = (event) => {
     event.preventDefault();
 
-    axios
-      .post("/newuser", {
-        username: username,
-        password: password,
-      })
-      .then(
-        (response) => {
-          // in here we can set the token in local storage which can then be sent in the authorization header for the future requests and will then let us see the privatepage
-          const token = response.data.token;
-          window.localStorage.setItem("AuthToken", token);
-          window.location.reload();
-        },
-        (error) => {
-          alert(error.response.data);
-        }
-      );
+    if (username === "" || password === "") {
+      alert("Please enter a valid username and password");
+    } else {
+      axios
+        .post("/newuser", {
+          username: username,
+          password: password,
+        })
+        .then(
+          (response) => {
+            // in here we can set the token in local storage which can then be sent in the authorization header for the future requests and will then let us see the privatepage
+            const token = response.data.token;
+            window.localStorage.setItem("AuthToken", token);
+            window.location.reload();
+          },
+          (error) => {
+            alert(error.response.data);
+          }
+        );
+    }
   };
 
   const handleLogin = (event) => {
     event.preventDefault();
-    //   take the state and post a request to the backend with the details
-    axios
-      .post("/login", {
-        username: username,
-        password: password,
-      })
-      .then(
-        (response) => {
-          // in here we can set the token in local storage which can then be sent in the authorization header for the future requests and will then let us see the privatepage
-          const token = response.data.token;
-          window.localStorage.setItem("AuthToken", token);
-          window.location.reload();
-        },
-        (error) => {
-          alert(error.response.data);
-        }
-      );
+
+    if (username === "" || password === "") {
+      alert("Please enter a valid username and password");
+    } else {
+      //   take the state and post a request to the backend with the details
+      axios
+        .post("/login", {
+          username: username,
+          password: password,
+        })
+        .then(
+          (response) => {
+            // in here we can set the token in local storage which can then be sent in the authorization header for the future requests and will then let us see the privatepage
+            const token = response.data.token;
+            window.localStorage.setItem("AuthToken", token);
+            window.location.reload();
+          },
+          (error) => {
+            alert(error.response.data);
+          }
+        );
+    }
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <div>
-        <Typography component="h1" variant="h5">
-          Log in
-        </Typography>
+      <div id="loginPage">
+        <h1>MathsTracker</h1>
         <form noValidate>
           <TextField
             variant="outlined"
@@ -95,24 +99,20 @@ export default function Login() {
             onChange={handlePasswordChange}
           />
 
-          <Button
+          <button
             id="logInButton"
+            class="signinButton"
             type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
             onClick={handleLogin}>
             Log In
-          </Button>
-          <Button
+          </button>
+          <button
+            class="signinButton"
             id="registerButton"
             type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
             onClick={handleRegister}>
             Register
-          </Button>
+          </button>
         </form>
       </div>
     </Container>
