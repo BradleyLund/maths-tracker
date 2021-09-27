@@ -10,14 +10,14 @@ let studentSubSchema = mongoose.Schema({
   todoDescription: String,
 });
 
-let UserSchema = mongoose.Schema({
+let StudentSchema = mongoose.Schema({
   username: String,
   password: String,
   studentsArray: [studentSubSchema],
 });
 
-UserSchema.pre("save", function (next) {
-  const user = this;
+StudentSchema.pre("save", function (next) {
+  const student = this;
 
   if (this.isModified("password") || this.isNew) {
     bcrypt.genSalt(10, function (saltError, salt) {
@@ -25,13 +25,13 @@ UserSchema.pre("save", function (next) {
         console.log(saltError);
         return next(saltError);
       } else {
-        bcrypt.hash(user.password, salt, function (hashError, hash) {
+        bcrypt.hash(student.password, salt, function (hashError, hash) {
           if (hashError) {
             console.log(hashError);
             return next(hashError);
           }
 
-          user.password = hash;
+          student.password = hash;
           next();
         });
       }
@@ -41,7 +41,7 @@ UserSchema.pre("save", function (next) {
   }
 });
 
-UserSchema.methods.comparePassword = function (password, callback) {
+StudentSchema.methods.comparePassword = function (password, callback) {
   bcrypt.compare(password, this.password, function (error, isMatch) {
     if (error) {
       return callback(error);
@@ -51,7 +51,7 @@ UserSchema.methods.comparePassword = function (password, callback) {
   });
 };
 
-UserSchema.methods.getSignedJwtToken = function () {
+StudentSchema.methods.getSignedJwtToken = function () {
   return jwt.sign(
     JSON.stringify({ username: this.username }),
     process.env.ACCESS_TOKEN_SECRET,
@@ -59,4 +59,4 @@ UserSchema.methods.getSignedJwtToken = function () {
   );
 };
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports = mongoose.model("Students", StudentSchema);

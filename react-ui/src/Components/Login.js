@@ -7,9 +7,14 @@ import axios from "axios";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [checkedOption, setCheckedOption] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+
+  const handleCheckBoxChange = (event) => {
+    setCheckedOption(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -98,21 +103,48 @@ export default function Login() {
             value={password}
             onChange={handlePasswordChange}
           />
+          <div id="radioButtons">
+            <div class="inputBox">
+              <input
+                type="radio"
+                value="teacher"
+                name="isStudent"
+                checked={checkedOption === "teacher"}
+                onChange={handleCheckBoxChange}
+              />{" "}
+              Teacher
+            </div>
+            <div class="inputBox">
+              <input
+                type="radio"
+                value="student"
+                name="isStudent"
+                checked={checkedOption === "student"}
+                onChange={handleCheckBoxChange}
+              />{" "}
+              Student
+            </div>
+          </div>
 
           <button
             id="logInButton"
-            class="signinButton"
+            class="button-66"
             type="submit"
             onClick={handleLogin}>
             Log In
           </button>
-          <button
-            class="signinButton"
-            id="registerButton"
-            type="submit"
-            onClick={handleRegister}>
-            Register
-          </button>
+
+          {checkedOption === "teacher" ? (
+            <button
+              class="button-66"
+              id="registerButton"
+              type="submit"
+              onClick={handleRegister}>
+              Register
+            </button>
+          ) : (
+            <></>
+          )}
         </form>
       </div>
     </Container>
