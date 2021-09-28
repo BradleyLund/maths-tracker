@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import AddStudent from "./AddStudent";
+import EditStudent from "./EditStudent";
 
 class PrivateTeacherApp extends React.Component {
   constructor(props) {
@@ -71,7 +72,7 @@ class PrivateTeacherApp extends React.Component {
             </Route>
             <Route path="/editstudent">
               {/* edit a student component here */}
-              <h2>edit a student</h2>
+              <EditStudent />
             </Route>
             <Route path="/difficultyexamples">
               {/* difficulty examples component here */}
