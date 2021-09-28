@@ -10,7 +10,7 @@ function isAuthenticated(req, res) {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     return decoded;
   } catch (err) {
-    res.send("badtoken");
+    res.status(401).send("badtoken");
   }
 }
 
@@ -56,6 +56,12 @@ module.exports = {
     // then we find them in the teachers model and get their list of students ID's
     // then we get each of the students data and pass it all back one time in a big object for the teacher, make an array of objects with
     // the data from the wirefram mock up
+  },
+
+  authorizeTeacher: function (req, res) {
+    let userObject = isAuthenticated(req, res);
+
+    res.send(userObject);
   },
 
   loginTeacher: function (req, res) {

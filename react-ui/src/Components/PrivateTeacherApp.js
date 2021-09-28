@@ -5,21 +5,9 @@ import axios from "axios";
 class PrivateTeacherApp extends React.Component {
   constructor(props) {
     super(props);
-
-    // initialise the state:
-    this.state = {
-      tasks: [],
-      input: "",
-    };
   }
 
   // we don't need to bind this when using an arrow function
-
-  handleLogout = (event) => {
-    event.preventDefault();
-    window.localStorage.removeItem("AuthToken");
-    window.location.reload();
-  };
 
   componentDidMount() {
     // send a get request to the backend with the token
@@ -42,9 +30,10 @@ class PrivateTeacherApp extends React.Component {
   // the function for handling the submition of the form
 
   render() {
+    console.log(this.props);
     return (
       <div>
-        <button className="button-66" onClick={this.handleLogout}>
+        <button className="button-66" onClick={this.props.handleLogout}>
           Log out
         </button>
       </div>
