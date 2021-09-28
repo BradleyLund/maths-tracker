@@ -11,7 +11,7 @@ class App extends React.Component {
 
     // initialise the state:
     this.state = {
-      loggedin: false,
+      loggedin: null,
       username: "",
       isTeacher: null,
     };
