@@ -3,6 +3,7 @@ import PrivateTeacherApp from "./Components/PrivateTeacherApp";
 import Login from "./Components/Login";
 import React from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -34,7 +35,6 @@ class App extends React.Component {
             isTeacher: true,
             loggedin: true,
           });
-          console.log(res.data);
         })
         .catch((error) => {
           console.error(error);
@@ -55,7 +55,10 @@ class App extends React.Component {
     return (
       <div id="parentDiv">
         {this.state.loggedin ? (
-          <PrivateTeacherApp handleLogout={this.handleLogout} />
+          <PrivateTeacherApp
+            handleLogout={this.handleLogout}
+            username={this.state.username}
+          />
         ) : (
           <Login />
         )}

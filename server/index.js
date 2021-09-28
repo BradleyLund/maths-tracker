@@ -22,7 +22,7 @@ app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
 require("./routes/newUser.js")(app);
 require("./routes/login.js")(app);
 require("./routes/authorize.js")(app);
-// require("./routes/getList.js")(app);
+require("./routes/getTeachersClass.js")(app);
 // require("./routes/addTodo.js")(app);
 // require("./routes/deleteTodo.js")(app);
 
