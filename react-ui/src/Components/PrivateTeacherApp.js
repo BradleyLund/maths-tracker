@@ -4,8 +4,8 @@ import axios from "axios";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import AddStudent from "./AddStudent";
 
 class PrivateTeacherApp extends React.Component {
   constructor(props) {
@@ -56,22 +56,18 @@ class PrivateTeacherApp extends React.Component {
                   <Link to="/editstudent">
                     <span className="navbarLink">Edit a student</span>
                   </Link>
-                  <Link onClick={this.props.handleLogout}>
+                  <Nav.Link onClick={this.props.handleLogout}>
                     <span className="navbarLink">Log out</span>
-                  </Link>
+                  </Nav.Link>
                 </Nav>
               </Navbar.Collapse>
             </Container>
           </Navbar>
 
           <Switch>
-            <Route path="/">
-              {/* react bootstrap table here */}
-              <h2>table of the students below</h2>
-            </Route>
             <Route path="/addstudent">
               {/* add a student component here */}
-              <h2>Add a student</h2>
+              <AddStudent />
             </Route>
             <Route path="/editstudent">
               {/* edit a student component here */}
@@ -80,6 +76,11 @@ class PrivateTeacherApp extends React.Component {
             <Route path="/difficultyexamples">
               {/* difficulty examples component here */}
               <h2>Examples for the difficulty levels</h2>
+            </Route>
+            {/* home needs to be at the bottom as the switch displays the first route that matches the link */}
+            <Route path="/">
+              {/* react bootstrap table here */}
+              <h2>table of the students below</h2>
             </Route>
           </Switch>
         </Router>
