@@ -65,17 +65,21 @@ class PrivateTeacherApp extends React.Component {
           </Navbar>
 
           <Switch>
+            <Route path="/">
+              {/* react bootstrap table here */}
+              <h2>table of the students below</h2>
+            </Route>
             <Route path="/addstudent">
+              {/* add a student component here */}
               <h2>Add a student</h2>
             </Route>
             <Route path="/editstudent">
+              {/* edit a student component here */}
               <h2>edit a student</h2>
             </Route>
             <Route path="/difficultyexamples">
-              <h2>edit a student</h2>
-            </Route>
-            <Route path="/">
-              <h2>table of the students below</h2>
+              {/* difficulty examples component here */}
+              <h2>Examples for the difficulty levels</h2>
             </Route>
           </Switch>
         </Router>
