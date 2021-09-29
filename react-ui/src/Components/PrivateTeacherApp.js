@@ -7,6 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudent";
+import DifficultyExamples from "./DifficultyExamples";
 
 class PrivateTeacherApp extends React.Component {
   constructor(props) {
@@ -76,7 +77,7 @@ class PrivateTeacherApp extends React.Component {
             </Route>
             <Route path="/difficultyexamples">
               {/* difficulty examples component here */}
-              <h2>Examples for the difficulty levels</h2>
+              <DifficultyExamples />
             </Route>
             {/* home needs to be at the bottom as the switch displays the first route that matches the link */}
             <Route path="/">
