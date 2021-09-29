@@ -58,6 +58,9 @@ class PrivateTeacherApp extends React.Component {
                   <Link to="/editstudent">
                     <span className="navbarLink">Edit a student</span>
                   </Link>
+                  <Link to="/difficultyexamples">
+                    <span className="navbarLink">Difficulty Examples</span>
+                  </Link>
                   <Nav.Link onClick={this.props.handleLogout}>
                     <span className="navbarLink">Log out</span>
                   </Nav.Link>
