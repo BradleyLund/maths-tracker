@@ -14,10 +14,10 @@ export default function EditStudent() {
 
   const [surname, setSurname] = useState("");
 
-  const [age, setAge] = React.useState("");
+  const [difficultyLevel, setDifficultyLevel] = useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setDifficultyLevel(event.target.value);
   };
 
   const handleFirstNameChange = (event) => {
@@ -60,16 +60,18 @@ export default function EditStudent() {
 
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <InputLabel id="demo-simple-select-label">
+                Difficulty Level
+              </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={age}
-                label="Age"
+                value={difficultyLevel}
+                label="Difficulty Level"
                 onChange={handleChange}>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={1}>Grade 1</MenuItem>
+                <MenuItem value={2}>Grade 2</MenuItem>
+                <MenuItem value={3}>Grade 3</MenuItem>
               </Select>
             </FormControl>
           </Box>

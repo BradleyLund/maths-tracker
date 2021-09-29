@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudent";
 import DifficultyExamples from "./DifficultyExamples";
+import StudentTable from "./StudentTable";
 
 class PrivateTeacherApp extends React.Component {
   constructor(props) {
@@ -85,7 +86,7 @@ class PrivateTeacherApp extends React.Component {
             {/* home needs to be at the bottom as the switch displays the first route that matches the link */}
             <Route path="/">
               {/* react bootstrap table here */}
-              <h2>table of the students below</h2>
+              <StudentTable />
             </Route>
           </Switch>
         </Router>
