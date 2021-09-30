@@ -61,6 +61,7 @@ class App extends React.Component {
           <PrivateTeacherApp
             handleLogout={this.handleLogout}
             username={this.state.username}
+            teacherID={this.state.teacherID}
           />
         ) : (
           <Login />

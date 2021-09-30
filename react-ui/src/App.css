@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+#loadingSpinner {
+   margin-top: 200px;
+}
+
 .signinButton {
   margin-top: 20px;
 }

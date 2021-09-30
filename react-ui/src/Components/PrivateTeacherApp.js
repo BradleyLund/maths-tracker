@@ -73,7 +73,7 @@ class PrivateTeacherApp extends React.Component {
           <Switch>
             <Route path="/addstudent">
               {/* add a student component here */}
-              <AddStudent />
+              <AddStudent teacherID={this.props.teacherID} />
             </Route>
             <Route path="/editstudent">
               {/* edit a student component here */}

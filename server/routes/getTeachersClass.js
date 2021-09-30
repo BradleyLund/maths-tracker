@@ -1,4 +1,4 @@
 module.exports = function (app) {
-  const teacher = require("../controllers/teacher.controller.js");
-  app.get("/getteachersclass", teacher.getTeachersClass);
+  const student = require("../controllers/student.controller.js");
+  app.get("/getteachersclass", student.getTeachersClass);
 };

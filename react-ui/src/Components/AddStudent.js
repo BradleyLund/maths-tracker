@@ -5,15 +5,16 @@ import axios from "axios";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-
+import Spinner from "react-bootstrap/Spinner";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 
-export default function AddStudent() {
+export default function AddStudent(props) {
   const [firstName, setFirstName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [surname, setSurname] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const [difficultyLevel, setDifficultyLevel] = useState("");
 
@@ -36,80 +37,139 @@ export default function AddStudent() {
     setSurname(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // First check that they have filled in the details
+    if (
+      username === "" ||
+      password === "" ||
+      firstName === "" ||
+      surname === "" ||
+      difficultyLevel === ""
+    ) {
+      alert("Please fill in all fields before submitting");
+    } else {
+      setLoading(true);
+      axios
+        .post("/newstudent", {
+          username: username,
+          password: password,
+          difficultyLevel: difficultyLevel,
+          firstName: firstName,
+          surname: surname,
+          teacherID: props.teacherID,
+        })
+        .then(
+          (response) => {
+            console.log(response);
+            alert("The student has been successfully added to your class");
+
+            setFirstName("");
+            setUsername("");
+            setPassword("");
+            setSurname("");
+            setLoading(false);
+          },
+          (error) => {
+            alert(error.response.data);
+            setLoading(false);
+          }
+        );
+    }
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <div id="loginPage">
-        <h1>Add a new student to your class</h1>
-        <form noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            value={username}
-            onChange={handleUsernameChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="firstName"
-            label="First Name"
-            name="firstName"
-            autoFocus
-            value={firstName}
-            onChange={handleFirstNameChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="surname"
-            label="Surname"
-            name="surname"
-            autoFocus
-            value={surname}
-            onChange={handleSurnameChange}
-          />
+        {isLoading ? (
+          <div id="loadingSpinner">
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : (
+          <div>
+            <h1>Add a new student to your class</h1>
+            <form noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={username}
+                onChange={handleUsernameChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password}
+                onChange={handlePasswordChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                name="firstName"
+                autoFocus
+                value={firstName}
+                onChange={handleFirstNameChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="surname"
+                label="Surname"
+                name="surname"
+                autoFocus
+                value={surname}
+                onChange={handleSurnameChange}
+              />
 
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Difficulty Level
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={difficultyLevel}
-                label="Difficulty Level"
-                onChange={handleChange}>
-                <MenuItem value={1}>Grade 1</MenuItem>
-                <MenuItem value={2}>Grade 2</MenuItem>
-                <MenuItem value={3}>Grade 3</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </form>
+              <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Difficulty Level
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={difficultyLevel}
+                    label="Difficulty Level"
+                    onChange={handleChange}>
+                    <MenuItem value={1}>Grade 1</MenuItem>
+                    <MenuItem value={2}>Grade 2</MenuItem>
+                    <MenuItem value={3}>Grade 3</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+
+              <button
+                id="logInButton"
+                className="button-66"
+                type="submit"
+                onClick={handleSubmit}>
+                Submit
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </Container>
   );
