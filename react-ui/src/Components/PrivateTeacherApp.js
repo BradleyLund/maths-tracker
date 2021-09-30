@@ -9,6 +9,7 @@ import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudent";
 import DifficultyExamples from "./DifficultyExamples";
 import StudentTable from "./StudentTable";
+import Spinner from "react-bootstrap/Spinner";
 
 class PrivateTeacherApp extends React.Component {
   constructor(props) {
@@ -17,11 +18,13 @@ class PrivateTeacherApp extends React.Component {
     // initialise the state:
     this.state = {
       studentsArray: [],
+      isLoading: false,
     };
   }
 
   componentDidMount() {
     // send a get request to the backend with the token
+    this.setState({ isLoading: true });
     let access_token = window.localStorage.getItem("AuthToken");
     axios
       .get("/getteachersclass", {
@@ -30,11 +33,14 @@ class PrivateTeacherApp extends React.Component {
         },
       })
       .then((res) => {
+        console.log(res);
         // getting the list of students once the teacher has logged in
         this.setState({ studentsArray: res.data });
+        this.setState({ isLoading: false });
       })
       .catch((error) => {
         console.error(error);
+        this.setState({ isLoading: false });
       });
   }
 
@@ -87,8 +93,14 @@ class PrivateTeacherApp extends React.Component {
             <Route path="/">
               {/* react bootstrap table here */}
 
-              {this.state.studentsArray.length > 0 ? (
-                <StudentTable />
+              {this.state.isLoading ? (
+                <div id="loadingSpinner">
+                  <Spinner animation="border" role="status" variant="primary">
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+                </div>
+              ) : this.state.studentsArray.length > 0 ? (
+                <StudentTable studentsArray={this.state.studentsArray} />
               ) : (
                 `You don't have any students in your class yet, click add a student`
               )}

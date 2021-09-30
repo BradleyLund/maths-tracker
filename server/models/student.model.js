@@ -17,7 +17,7 @@ let StudentSchema = mongoose.Schema({
   username: String,
   password: String,
   difficultyLevel: Number,
-  fullname: String,
+  fullName: String,
   teacherID: String,
   lessonHistoryArray: [lessonHistorySubSchema],
 });

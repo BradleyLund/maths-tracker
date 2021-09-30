@@ -83,7 +83,7 @@ export default function AddStudent(props) {
       <div id="loginPage">
         {isLoading ? (
           <div id="loadingSpinner">
-            <Spinner animation="border" role="status">
+            <Spinner animation="border" role="status" variant="primary">
               <span className="visually-hidden">Loading...</span>
             </Spinner>
           </div>

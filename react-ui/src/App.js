@@ -4,6 +4,7 @@ import Login from "./Components/Login";
 import React from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Spinner from "react-bootstrap/Spinner";
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
       username: "",
       isTeacher: null,
       teacherID: "",
+      isLoading: false,
     };
   }
 
@@ -22,6 +24,8 @@ class App extends React.Component {
     if (window.localStorage.getItem("AuthToken") !== null) {
       // check the authtoken on the backend, and if the auth token is valid set loggedin to true otherwise say not logged in
       // and if authorized make sure what type of authorization, teacher or student. then display different private apps depending
+      this.setState({ isLoading: true });
+
       let access_token = window.localStorage.getItem("AuthToken");
       axios
         .get("/authorize", {
@@ -37,9 +41,11 @@ class App extends React.Component {
             loggedin: true,
             teacherID: res.data.teacherID,
           });
+          this.setState({ isLoading: false });
         })
         .catch((error) => {
           console.error(error);
+          this.setState({ isLoading: false });
         });
     } else {
       this.setState({ username: "", isTeacher: null, loggedin: false });
@@ -57,7 +63,13 @@ class App extends React.Component {
     console.log(this.state.teacherID);
     return (
       <div id="parentDiv">
-        {this.state.loggedin ? (
+        {this.state.isLoading ? (
+          <div id="loadingSpinner">
+            <Spinner animation="border" role="status" variant="primary">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </div>
+        ) : this.state.loggedin ? (
           <PrivateTeacherApp
             handleLogout={this.handleLogout}
             username={this.state.username}
