@@ -23,8 +23,8 @@ require("./routes/newUser.js")(app);
 require("./routes/login.js")(app);
 require("./routes/authorize.js")(app);
 require("./routes/getTeachersClass.js")(app);
-// require("./routes/addTodo.js")(app);
-// require("./routes/deleteTodo.js")(app);
+require("./routes/newStudent.js")(app);
+require("./routes/loginStudent.js")(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

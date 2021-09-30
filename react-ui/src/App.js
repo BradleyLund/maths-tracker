@@ -14,6 +14,7 @@ class App extends React.Component {
       loggedin: null,
       username: "",
       isTeacher: null,
+      teacherID: "",
     };
   }
 
@@ -34,6 +35,7 @@ class App extends React.Component {
             username: res.data.username,
             isTeacher: true,
             loggedin: true,
+            teacherID: res.data.teacherID,
           });
         })
         .catch((error) => {
@@ -52,6 +54,7 @@ class App extends React.Component {
   // here we want to put if logged in then show private app otherwise show the login screen
   // we need to authorize the token properly.
   render() {
+    console.log(this.state.teacherID);
     return (
       <div id="parentDiv">
         {this.state.loggedin ? (

@@ -6,14 +6,20 @@ const jwt = require("jsonwebtoken");
 // https://coderrocketfuel.com/article/store-passwords-in-mongodb-with-node-js-mongoose-and-bcrypt
 
 // create a subschema for the todo list array, this will allow us to save the todolist item and let it have an id for deleting
-let studentSubSchema = mongoose.Schema({
-  todoDescription: String,
+let lessonHistorySubSchema = mongoose.Schema({
+  date: Date,
+  difficultyLevel: Number,
+  score: Number,
+  totalTime: Date,
 });
 
 let StudentSchema = mongoose.Schema({
   username: String,
   password: String,
-  studentsArray: [studentSubSchema],
+  difficultyLevel: Number,
+  fullname: String,
+  teacherID: String,
+  lessonHistoryArray: [lessonHistorySubSchema],
 });
 
 StudentSchema.pre("save", function (next) {

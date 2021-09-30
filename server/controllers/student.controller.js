@@ -27,10 +27,12 @@ module.exports = {
       } else if (!student) {
         //   no username with that name found
 
-        let StudentModel = new Student({
+        let studentModel = new Student({
           username: req.body.username,
           password: req.body.password,
-          toDoArray: [],
+          difficultyLevel: req.body.difficultyLevel,
+          fullName: `${req.body.firstName} ${req.body.surname}`,
+          teacherID: req.body.teacherID,
         });
 
         studentModel.save(function (error, student) {

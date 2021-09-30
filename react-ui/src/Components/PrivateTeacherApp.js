@@ -86,7 +86,12 @@ class PrivateTeacherApp extends React.Component {
             {/* home needs to be at the bottom as the switch displays the first route that matches the link */}
             <Route path="/">
               {/* react bootstrap table here */}
-              <StudentTable />
+
+              {this.state.studentsArray.length > 0 ? (
+                <StudentTable />
+              ) : (
+                `You don't have any students in your class yet, click add a student`
+              )}
             </Route>
           </Switch>
         </Router>
