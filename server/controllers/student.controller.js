@@ -57,6 +57,34 @@ module.exports = {
   submitLessonResults: function (req, res) {
     console.log("first test route");
     // here we will receive the difficulty level, date, score and time spent for a lesson done by the student
+    let userObject = isAuthenticated(req, res);
+
+    // we need to find the student
+    Student.findOne({ username: req.body.username }).exec(function (
+      error,
+      student
+    ) {
+      if (error) {
+        //   error with the mongoose findone function
+        res.status(401).send("error with the mongoose findone function");
+      } else if (!student) {
+        //   no username with that name found
+        res.status(401).send("no username with that name found");
+      } else {
+        //   found the student and now need to add to the lessonhistory array
+        student.toDoArray.push({ date: Date.now() });
+        // // // save the user
+        user.save(function (error, data) {
+          if (error) {
+            console.log(error);
+            res.send("some error ocurred while adding the todo");
+          } else {
+            // maybe send back in res.json (username and the todoarray? or just the todoarray)
+            res.send(data.toDoArray);
+          }
+        });
+      }
+    });
   },
 
   getTeachersClass: function (req, res) {
