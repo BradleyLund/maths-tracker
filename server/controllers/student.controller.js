@@ -90,6 +90,23 @@ module.exports = {
     });
   },
 
+  changeDifficulty: function (req, res) {
+    Student.findOneAndUpdate(
+      { username: req.body.username },
+      { difficultyLevel: req.body.difficultyLevel }
+    ).exec(function (error, student) {
+      if (error) {
+        //   error with the mongoose findone function
+        res.status(401).send("error with the mongoose findone function");
+      } else if (!student) {
+        //   no username with that name found
+        res.status(401).send("no username with that name found");
+      } else {
+        res.send("update successful");
+      }
+    });
+  },
+
   getTeachersClass: function (req, res) {
     // we will have the auth token in the header here, so we send it to the isauthenticated function to get the teacher username
     // then we find them in the teachers model and get their list of students ID's

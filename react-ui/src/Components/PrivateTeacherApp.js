@@ -83,7 +83,7 @@ class PrivateTeacherApp extends React.Component {
             </Route>
             <Route path="/editstudent">
               {/* edit a student component here */}
-              <EditStudent />
+              <EditStudent studentsArray={this.state.studentsArray} />
             </Route>
             <Route path="/difficultyexamples">
               {/* difficulty examples component here */}

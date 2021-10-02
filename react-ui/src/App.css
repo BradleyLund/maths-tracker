@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.editBox {
+  margin-top: 30px;
+}
+
 
 #lessonPageContainer {
   display: flex;

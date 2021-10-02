@@ -131,6 +131,7 @@ export default function AddStudent(props) {
               />
               <TextField
                 variant="outlined"
+                id="outlined-basic"
                 margin="normal"
                 required
                 fullWidth
