@@ -55,10 +55,7 @@ module.exports = {
     });
   },
   submitLessonResults: function (req, res) {
-    console.log("first test route");
     // here we will receive the difficulty level, date, score and time spent for a lesson done by the student
-    let userObject = isAuthenticated(req, res);
-
     // we need to find the student
     Student.findOne({ username: req.body.username }).exec(function (
       error,
@@ -72,15 +69,21 @@ module.exports = {
         res.status(401).send("no username with that name found");
       } else {
         //   found the student and now need to add to the lessonhistory array
-        student.toDoArray.push({ date: Date.now() });
+        student.lessonHistoryArray.push({
+          username: req.body.username,
+          date: req.body.date,
+          difficultyLevel: req.body.difficultyLevel,
+          score: req.body.score,
+          totalTime: req.body.totalTime,
+        });
         // // // save the user
-        user.save(function (error, data) {
+        student.save(function (error, data) {
           if (error) {
             console.log(error);
             res.send("some error ocurred while adding the todo");
           } else {
             // maybe send back in res.json (username and the todoarray? or just the todoarray)
-            res.send(data.toDoArray);
+            res.send(data.lessonHistoryArray);
           }
         });
       }

@@ -1,5 +1,6 @@
 import React from "react";
 import Question from "./Question";
+import axios from "axios";
 
 // function to generate a question and answer depending on the difficulty level
 
@@ -44,8 +45,8 @@ class LessonPage extends React.Component {
       questionCount: 0,
       correctCount: 0,
       elapsedTime: 0,
-      question: "3 x 6",
-      answer: 18,
+      question: "",
+      answer: null,
       answerInput: "",
     };
 
@@ -54,10 +55,37 @@ class LessonPage extends React.Component {
     this.handleStart = this.handleStart.bind(this);
     this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.postLessonResult = this.postLessonResult.bind(this);
   }
 
   handleInputChange(event) {
     this.setState({ answerInput: event.target.value });
+  }
+
+  // post function which is called as a callback after setState to make sure the correctCount is correct as setstate is asynchronous so
+  // correctcount hasn't been updated by the time the data is posted
+
+  postLessonResult() {
+    let lessonDate = new Date();
+    lessonDate = lessonDate.toISOString().split("T")[0];
+    //   send the results to the DB
+    axios
+      .post("/submitlessonresults", {
+        username: this.props.username,
+        date: lessonDate,
+        difficultyLevel: this.props.difficultyLevel,
+        score: this.state.correctCount,
+        totalTime: this.state.elapsedTime,
+      })
+      .then(
+        (response) => {
+          //   we receive the lessonHistory array for the specific user so we can use the response to update the state of the home table
+          console.log(response);
+        },
+        (error) => {
+          alert(error.response.data);
+        }
+      );
   }
 
   //   function to handle the next question when they submit an answer
@@ -69,20 +97,26 @@ class LessonPage extends React.Component {
       let intAnswer = parseInt(answer);
 
       if (intAnswer === this.state.answer) {
-        this.setState({ correctCount: this.state.correctCount + 1 });
+        //   we need to make sure the state is updated before posting the data to the backend, so we use a callback function is setState, so that
+        // the count is incremented, and once this has completed, the postLessonResult function posts the correct score to the backend
+        // we don't need to do this for an incorrect last question
+        this.setState({ correctCount: this.state.correctCount + 1 }, () =>
+          this.postLessonResult()
+        );
       } else {
-        alert("incorrect");
+        this.postLessonResult();
       }
       clearInterval(countUpTimer);
       this.setState({ questionCount: this.state.questionCount + 1 });
     } else {
       let intAnswer = parseInt(answer);
-
+      console.log(this.state.correctCount);
       if (intAnswer === this.state.answer) {
         this.setState({ correctCount: this.state.correctCount + 1 });
       } else {
-        alert("incorrect");
+        // alert("incorrect");
       }
+      console.log(this.state.correctCount);
 
       //   set up the next new random question and answer
       let questionAnswer = generateQuestionAnswer(this.props.difficultyLevel);
