@@ -11,6 +11,7 @@ import DifficultyExamples from "./DifficultyExamples";
 import StudentTable from "./StudentTable";
 import Spinner from "react-bootstrap/Spinner";
 import LessonPage from "./LessonPage";
+import LessonHistoryTable from "./LessonHistoryTable";
 
 class PrivateStudentApp extends React.Component {
   constructor(props) {
@@ -88,8 +89,9 @@ class PrivateStudentApp extends React.Component {
 
             {/* home needs to be at the bottom as the switch displays the first route that matches the link */}
             <Route path="/">
-              <div>hello, student</div>
-              {console.log(this.state.lessonHistoryArray)}
+              <LessonHistoryTable
+                lessonHistoryArray={this.state.lessonHistoryArray}
+              />
               {/* react bootstrap table here */}
               {/* we want a lessonHistory table below */}
               {/* {this.state.isLoading ? (
