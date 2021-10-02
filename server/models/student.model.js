@@ -10,7 +10,7 @@ let lessonHistorySubSchema = mongoose.Schema({
   date: Date,
   difficultyLevel: Number,
   score: Number,
-  totalTime: Date,
+  totalTime: Number,
 });
 
 let StudentSchema = mongoose.Schema({

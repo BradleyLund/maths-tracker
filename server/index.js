@@ -26,6 +26,7 @@ require("./routes/getTeachersClass.js")(app);
 require("./routes/newStudent.js")(app);
 require("./routes/loginStudent.js")(app);
 require("./routes/getStudentHistory.js")(app);
+require("./routes/submitLessonResults.js")(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

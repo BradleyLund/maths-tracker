@@ -54,6 +54,10 @@ module.exports = {
       }
     });
   },
+  submitLessonResults: function (req, res) {
+    console.log("first test route");
+    // here we will receive the difficulty level, date, score and time spent for a lesson done by the student
+  },
 
   getTeachersClass: function (req, res) {
     // we will have the auth token in the header here, so we send it to the isauthenticated function to get the teacher username
