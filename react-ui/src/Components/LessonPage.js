@@ -12,11 +12,18 @@ class LessonPage extends React.Component {
     this.state = {
       questionCount: 0,
       correctCount: 0,
-      elapsedTime: null,
+      elapsedTime: 0,
     };
 
     this.startTimer = this.startTimer.bind(this);
     this.countUp = this.countUp.bind(this);
+    this.handleStart = this.handleStart.bind(this);
+  }
+
+  //   function to handle the start of the quiz
+  handleStart() {
+    this.startTimer();
+    this.setState({ questionCount: this.state.questionCount + 1 });
   }
 
   // start the elapsed time clock
@@ -34,8 +41,16 @@ class LessonPage extends React.Component {
     return (
       <div id="lessonPageContainer">
         Welcome to your next lesson {this.props.username}{" "}
-        <button onClick={this.startTimer}>Start Quiz</button>
         <div>{this.state.elapsedTime}</div>
+        {this.state.questionCount === 0 ? (
+          <div>
+            <button className="button-66" onClick={this.handleStart}>
+              Start Quiz
+            </button>
+          </div>
+        ) : (
+          <div>question component</div>
+        )}
       </div>
     );
   }
