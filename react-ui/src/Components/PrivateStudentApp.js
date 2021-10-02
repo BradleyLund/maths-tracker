@@ -79,7 +79,10 @@ class PrivateStudentApp extends React.Component {
           <Switch>
             <Route path="/nextlesson">
               {/* add a student component here */}
-              <LessonPage username={this.props.username} />
+              <LessonPage
+                username={this.props.username}
+                difficultyLevel={this.state.difficultyLevel}
+              />
               {/* <AddStudent teacherID={this.props.teacherID} /> */}
             </Route>
 

@@ -1,6 +1,35 @@
 import React from "react";
 import Question from "./Question";
 
+// function to generate a question and answer depending on the difficulty level
+
+// receive the difficultyLevel of the student and return a question and the correct answer
+
+function generateQuestionAnswer(difficultyLevel) {
+  if (difficultyLevel === 1) {
+    // we'll only do single digit addition for now
+    let integer1 = Math.floor(Math.random() * 10) + 1;
+    let integer2 = Math.floor(Math.random() * 10) + 1;
+    let answer = integer1 + integer2;
+    let question = `${integer1} + ${integer2}`;
+    return { question: question, answer: answer };
+  } else if (difficultyLevel === 2) {
+    //   double digit addition
+    let integer1 = Math.floor(Math.random() * 100) + 1;
+    let integer2 = Math.floor(Math.random() * 100) + 1;
+    let answer = integer1 + integer2;
+    let question = `${integer1} + ${integer2}`;
+    return { question: question, answer: answer };
+  } else if (difficultyLevel === 3) {
+    //   single digit multiplication
+    let integer1 = Math.floor(Math.random() * 10) + 1;
+    let integer2 = Math.floor(Math.random() * 10) + 1;
+    let answer = integer1 * integer2;
+    let question = `${integer1} x ${integer2}`;
+    return { question: question, answer: answer };
+  }
+}
+
 // welcome to your next lesson, we need to set up a react timer like from minesweeper
 // generate a random question, once they are finished they can click finish lesson and that will post all the results to the backend
 // declare the coutUpTimer variable so that when we clearinterval it is accessible by the handle submit answer function
@@ -17,12 +46,18 @@ class LessonPage extends React.Component {
       elapsedTime: 0,
       question: "3 x 6",
       answer: 18,
+      answerInput: "",
     };
 
     this.startTimer = this.startTimer.bind(this);
     this.countUp = this.countUp.bind(this);
     this.handleStart = this.handleStart.bind(this);
     this.handleSubmitAnswer = this.handleSubmitAnswer.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    this.setState({ answerInput: event.target.value });
   }
 
   //   function to handle the next question when they submit an answer
@@ -31,26 +66,47 @@ class LessonPage extends React.Component {
     if (this.state.questionCount === 10) {
       // send results to Db, display results for the quiz, I can display results in the UI
       //   clear interval
-      clearInterval(countUpTimer);
-    }
-    this.setState({ questionCount: this.state.questionCount + 1 });
-    // change the question to the next question
-    let intAnswer = parseInt(answer);
+      let intAnswer = parseInt(answer);
 
-    if (intAnswer === this.state.answer) {
-      this.setState({ correctCount: this.state.correctCount + 1 });
+      if (intAnswer === this.state.answer) {
+        this.setState({ correctCount: this.state.correctCount + 1 });
+      } else {
+        alert("incorrect");
+      }
+      clearInterval(countUpTimer);
+      this.setState({ questionCount: this.state.questionCount + 1 });
     } else {
-      alert("incorrect");
+      let intAnswer = parseInt(answer);
+
+      if (intAnswer === this.state.answer) {
+        this.setState({ correctCount: this.state.correctCount + 1 });
+      } else {
+        alert("incorrect");
+      }
+
+      //   set up the next new random question and answer
+      let questionAnswer = generateQuestionAnswer(this.props.difficultyLevel);
+      this.setState({
+        questionCount: this.state.questionCount + 1,
+        question: questionAnswer.question,
+        answer: questionAnswer.answer,
+        answerInput: "",
+      });
     }
+
     // change the answer to the answer received from the generated question
   }
 
   //   function to handle the start of the quiz
   handleStart() {
     this.startTimer();
-    this.setState({ questionCount: this.state.questionCount + 1 });
     // change the first question by generating a question
-
+    let questionAnswer = generateQuestionAnswer(this.props.difficultyLevel);
+    this.setState({
+      questionCount: this.state.questionCount + 1,
+      question: questionAnswer.question,
+      answer: questionAnswer.answer,
+    });
     // change the answer to be the answer to the generated question
   }
 
@@ -84,6 +140,8 @@ class LessonPage extends React.Component {
             questionCount={this.state.questionCount}
             handleSubmitAnswer={this.handleSubmitAnswer}
             question={this.state.question}
+            answerInput={this.state.answerInput}
+            handleInputChange={this.handleInputChange}
           />
         )}
       </div>

@@ -4,14 +4,6 @@ import TextField from "@material-ui/core/TextField";
 class Question extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { answerInput: "" };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleInputChange(event) {
-    this.setState({ answerInput: event.target.value });
   }
 
   render() {
@@ -29,11 +21,11 @@ class Question extends React.Component {
           fullWidth
           name="answerInput"
           id="answerInput"
-          value={this.state.answerInput}
-          onChange={this.handleInputChange}
+          value={this.props.answerInput}
+          onChange={this.props.handleInputChange}
         />
         <button
-          onClick={() => this.props.handleSubmitAnswer(this.state.answerInput)}>
+          onClick={() => this.props.handleSubmitAnswer(this.props.answerInput)}>
           Submit Answer
         </button>
       </div>
