@@ -114,6 +114,7 @@ module.exports = {
               res.status(200).send({
                 username: teacher.username,
                 token: teacher.getSignedJwtToken(),
+                isTeacher: true,
               });
             }
           }

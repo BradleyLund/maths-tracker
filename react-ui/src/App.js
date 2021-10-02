@@ -5,6 +5,7 @@ import React from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Spinner from "react-bootstrap/Spinner";
+import PrivateStudentApp from "./Components/PrivateStudentApp";
 
 class App extends React.Component {
   constructor(props) {
@@ -35,11 +36,13 @@ class App extends React.Component {
         })
         .then((res) => {
           // handling getting the initial data once the user is logged in
+          console.log(res.data);
           this.setState({
             username: res.data.username,
-            isTeacher: true,
+            isTeacher: res.data.isTeacher,
             loggedin: true,
             teacherID: res.data.teacherID,
+            studentID: res.data.studentID,
           });
           this.setState({ isLoading: false });
         })
@@ -70,11 +73,18 @@ class App extends React.Component {
             </Spinner>
           </div>
         ) : this.state.loggedin ? (
-          <PrivateTeacherApp
-            handleLogout={this.handleLogout}
-            username={this.state.username}
-            teacherID={this.state.teacherID}
-          />
+          this.state.isTeacher ? (
+            <PrivateTeacherApp
+              handleLogout={this.handleLogout}
+              username={this.state.username}
+              teacherID={this.state.teacherID}
+            />
+          ) : (
+            <PrivateStudentApp
+              handleLogout={this.handleLogout}
+              username={this.state.username}
+            />
+          )
         ) : (
           <Login />
         )}

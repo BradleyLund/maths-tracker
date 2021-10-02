@@ -79,6 +79,30 @@ module.exports = {
       }
     });
   },
+  getStudentHistory: function (req, res) {
+    // we will have the auth token in the header here, so we send it to the isauthenticated function to get the teacher username
+    // then we find them in the teachers model and get their list of students ID's
+    // then we get each of the students data and pass it all back one time in a big object for the teacher, make an array of objects with
+    // the data from the wirefram mock up
+
+    let userObject = isAuthenticated(req, res);
+
+    Student.findOne({ username: userObject.username }).exec(function (
+      error,
+      student
+    ) {
+      if (error) {
+        //   error with the mongoose findone function
+        res.status(401).send("error with the mongoose findone function");
+      } else if (!student) {
+        //   no username with that name found
+        res.status(401).send("no username with that name found");
+      } else {
+        //   found the teacher and now comparing
+        res.send(student);
+      }
+    });
+  },
 
   loginStudent: function (req, res) {
     Student.findOne({ username: req.body.username }).exec(function (
@@ -112,6 +136,7 @@ module.exports = {
               res.status(200).send({
                 username: student.username,
                 token: student.getSignedJwtToken(),
+                isTeacher: false,
               });
             }
           }

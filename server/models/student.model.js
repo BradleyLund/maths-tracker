@@ -59,7 +59,11 @@ StudentSchema.methods.comparePassword = function (password, callback) {
 
 StudentSchema.methods.getSignedJwtToken = function () {
   return jwt.sign(
-    JSON.stringify({ username: this.username, isTeacher: false }),
+    JSON.stringify({
+      username: this.username,
+      isTeacher: false,
+      studentID: this._id,
+    }),
     process.env.ACCESS_TOKEN_SECRET,
     { algorithm: "HS256" }
   );
