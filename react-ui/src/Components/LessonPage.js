@@ -157,8 +157,14 @@ class LessonPage extends React.Component {
   render() {
     return (
       <div id="lessonPageContainer">
-        Welcome to your next lesson {this.props.username}{" "}
-        <div>{this.state.elapsedTime}</div>
+        <h2 className="classAbout">
+          Welcome to your next lesson {this.props.username}{" "}
+        </h2>
+        <div id="timeTaken">
+          Total time:{" "}
+          {new Date(this.state.elapsedTime * 1000).toISOString().substr(11, 8)}{" "}
+          🕒
+        </div>
         {this.state.questionCount === 0 ? (
           <div>
             <button className="button-66" onClick={this.handleStart}>
@@ -166,9 +172,7 @@ class LessonPage extends React.Component {
             </button>
           </div>
         ) : this.state.questionCount === 11 ? (
-          <div>
-            Here are your results you got {this.state.correctCount} out of 10
-          </div>
+          <div>Results: {this.state.correctCount} out of 10</div>
         ) : (
           <Question
             questionCount={this.state.questionCount}

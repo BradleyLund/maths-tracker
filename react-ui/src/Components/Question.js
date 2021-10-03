@@ -25,6 +25,7 @@ class Question extends React.Component {
           onChange={this.props.handleInputChange}
         />
         <button
+          className="button-66"
           onClick={() => this.props.handleSubmitAnswer(this.props.answerInput)}>
           Submit Answer
         </button>

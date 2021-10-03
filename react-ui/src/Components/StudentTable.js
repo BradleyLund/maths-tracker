@@ -41,8 +41,12 @@ export default function StudentTable(props) {
             <td>{student.username}</td>
             <td>{student.difficultyLevel}</td>
             <td>{student.cumulativeScore}</td>
-            <td>{student.percentage}%</td>
-            <td>{student.cumulativeTime} </td>
+            <td>{student.percentage.toFixed(2)}%</td>
+            <td>
+              {new Date(student.cumulativeTime * 1000)
+                .toISOString()
+                .substr(11, 8)}{" "}
+            </td>
           </tr>
         ))}
       </tbody>

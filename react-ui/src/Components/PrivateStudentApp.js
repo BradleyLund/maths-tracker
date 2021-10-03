@@ -62,13 +62,16 @@ class PrivateStudentApp extends React.Component {
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav>
-                  <Link to="/">
-                    <span className="navbarLink">Home</span>
-                  </Link>
-                  <Link to="/nextlesson">
-                    <span className="navbarLink">Start your next lesson</span>
-                  </Link>
-
+                  <Navbar.Text>
+                    <Link to="/">
+                      <span className="navbarLink">Home</span>
+                    </Link>
+                  </Navbar.Text>
+                  <Navbar.Text>
+                    <Link to="/nextlesson">
+                      <span className="navbarLink">Start your next lesson</span>
+                    </Link>
+                  </Navbar.Text>
                   <Nav.Link onClick={this.props.handleLogout}>
                     <span className="navbarLink">Log out</span>
                   </Nav.Link>
@@ -89,22 +92,15 @@ class PrivateStudentApp extends React.Component {
 
             {/* home needs to be at the bottom as the switch displays the first route that matches the link */}
             <Route path="/">
-              <LessonHistoryTable
-                lessonHistoryArray={this.state.lessonHistoryArray}
-              />
-              {/* react bootstrap table here */}
-              {/* we want a lessonHistory table below */}
-              {/* {this.state.isLoading ? (
-                <div id="loadingSpinner">
-                  <Spinner animation="border" role="status" variant="primary">
-                    <span className="visually-hidden">Loading...</span>
-                  </Spinner>
-                </div>
-              ) : this.state.studentsArray.length > 0 ? (
-                <StudentTable studentsArray={this.state.studentsArray} />
-              ) : (
-                `You don't have any students in your class yet, click add a student`
-              )} */}
+              <div id="classTable">
+                <h2 className="classAbout">
+                  Welcome to your lesson History! Here you can see all of your
+                  results from previous lessons! 👨‍🎓
+                </h2>
+                <LessonHistoryTable
+                  lessonHistoryArray={this.state.lessonHistoryArray}
+                />
+              </div>
             </Route>
           </Switch>
         </Router>
