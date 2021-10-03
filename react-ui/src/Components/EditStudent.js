@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 import InputLabel from "@mui/material/InputLabel";
@@ -8,13 +7,8 @@ import Select from "@mui/material/Select";
 
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
-import { Menu } from "@chakra-ui/menu";
 
 export default function EditStudent(props) {
-  const [firstName, setFirstName] = useState("");
-
-  const [surname, setSurname] = useState("");
-
   const [difficultyLevel, setDifficultyLevel] = useState("");
 
   const [studentUsername, setStudentUsername] = useState("");

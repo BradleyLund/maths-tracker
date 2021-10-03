@@ -5,11 +5,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import AddStudent from "./AddStudent";
-import EditStudent from "./EditStudent";
-import DifficultyExamples from "./DifficultyExamples";
-import StudentTable from "./StudentTable";
-import Spinner from "react-bootstrap/Spinner";
 import LessonPage from "./LessonPage";
 import LessonHistoryTable from "./LessonHistoryTable";
 

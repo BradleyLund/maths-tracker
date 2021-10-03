@@ -80,8 +80,7 @@ module.exports = {
         //  save the user
         student.save(function (error, data) {
           if (error) {
-            console.log(error);
-            res.send("some error ocurred while adding the todo");
+            res.send("some error ocurred while adding the Student lesson");
           } else {
             res.send(data.lessonHistoryArray);
           }
@@ -112,7 +111,6 @@ module.exports = {
     // we will have the auth token in the header here, so we send it to the isauthenticated function to get the teacher ID
     // we then find all of the data for the students with a teacher ID of the teacher
     let userObject = isAuthenticated(req, res);
-    console.log(userObject);
 
     Student.find({ teacherID: userObject.teacherID }).exec(function (
       error,
