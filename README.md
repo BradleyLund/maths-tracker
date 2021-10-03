@@ -72,3 +72,55 @@ and will allow for cost effective scaling if need be.
 - As a Student, I want it to be fun to login to my account and do maths problems
 - As a Student, I want an easy to use and intuitive interface that is attractive
   and inviting
+
+## How to use the application
+
+After cloning the git repository follow the following commands to get the app up
+and running
+
+`cd maths-tracker`
+
+`npm install`
+
+`npm start`
+
+You now should have the backend up and running
+
+to run the front end, change directory to the react-ui folder
+
+`cd react-ui`
+
+`npm install`
+
+`npm start`
+
+The front end should now be running.
+
+To get the functionality to work you will need to create a .env file which is in
+the same directory as your server package.json file
+
+in the .env file you will need to provide two secret keys
+
+DB_URI=[Insert your mongoDB connection link here] ACCESS_TOKEN_SECRET=[Insert
+any secret code for JSON web tokens here ]
+
+## Security
+
+The server makes use of <a href="https://helmetjs.github.io/">Helmet</a>
+middleware to secure the app.
+
+## Live application:
+
+You can access the live application at the below link:
+
+<a href="https://heroku-todo-test.herokuapp.com/">MathsTracker</a>
+
+Feel free to register as a new teacher and then add students to your class.
+
+Or you can use the test Teacher log in credentials here:
+
+username: testTeacher password: test1234
+
+and to log in as a student you can use these credentials:
+
+username: testStudent password: test1234

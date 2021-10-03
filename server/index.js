@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 require("dotenv").config();
-// const helmet = require("helmet");
+const helmet = require("helmet");
 
 // needed to add this so that the frontend could make a request and see the response
 var cors = require("cors");
@@ -17,26 +17,26 @@ app.use(cors());
 
 app.use(express.json());
 
-// app.use(helmet());
+app.use(helmet());
 
 // Priority serve any static files.
 app.use(express.static(path.resolve(__dirname, "../react-ui/build")));
 
-// app.get("/api", function (request, response) {
-//   response.send("Backend up and running");
-// });
+app.get("/api", function (request, response) {
+  response.send("Backend up and running");
+});
 
 // add in all the routes that we use
 require("./routes/newUser.js")(app);
 require("./routes/login.js")(app);
 
-// require("./routes/authorize.js")(app);
-// require("./routes/getTeachersClass.js")(app);
-// require("./routes/newStudent.js")(app);
-// require("./routes/loginStudent.js")(app);
-// require("./routes/getStudentHistory.js")(app);
-// require("./routes/submitLessonResults.js")(app);
-// require("./routes/submitDifficultyChange.js")(app);
+require("./routes/authorize.js")(app);
+require("./routes/getTeachersClass.js")(app);
+require("./routes/newStudent.js")(app);
+require("./routes/loginStudent.js")(app);
+require("./routes/getStudentHistory.js")(app);
+require("./routes/submitLessonResults.js")(app);
+require("./routes/submitDifficultyChange.js")(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
