@@ -100,7 +100,7 @@ export default function Login() {
   return (
     <Container component="main" maxWidth="xs">
       <div id="loginPage">
-        <h1>MathsTracker</h1>
+        <h1 style={{ fontWeight: "bold" }}>MathsTracker</h1>
         <form noValidate>
           <TextField
             variant="outlined"
@@ -171,6 +171,16 @@ export default function Login() {
             <></>
           )}
         </form>
+        <div id="aboutSection">
+          <h2 style={{ fontWeight: "bold" }}>About</h2>
+          <p>
+            Welcome to MathsTracker, the perfect web application to track your
+            students maths performance 💯<br></br>
+            <br></br>
+            If you are a teacher, you can register a new account. If you are a
+            student, your teacher will sign you up! 🚀
+          </p>
+        </div>
       </div>
     </Container>
   );

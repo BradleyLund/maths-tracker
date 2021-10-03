@@ -54,20 +54,32 @@ class PrivateTeacherApp extends React.Component {
             <Container>
               <Navbar.Brand>Welcome, {this.props.username} </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav>
-                  <Link to="/">
-                    <span className="navbarLink">Home</span>
-                  </Link>
-                  <Link to="/addstudent">
-                    <span className="navbarLink">Add a student</span>
-                  </Link>
-                  <Link to="/editstudent">
-                    <span className="navbarLink">Edit a student</span>
-                  </Link>
-                  <Link to="/difficultyexamples">
-                    <span className="navbarLink">Difficulty Examples</span>
-                  </Link>
+                  <Navbar.Text>
+                    <Link to="/">
+                      <span className="navbarLink">Home</span>
+                    </Link>
+                  </Navbar.Text>
+                  <Navbar.Text>
+                    <Link to="/addstudent">
+                      <span className="navbarLink">Add a student</span>
+                    </Link>
+                  </Navbar.Text>
+
+                  <Navbar.Text>
+                    <Link to="/editstudent">
+                      <span className="navbarLink">Edit a student</span>
+                    </Link>
+                  </Navbar.Text>
+
+                  <Navbar.Text>
+                    <Link to="/difficultyexamples">
+                      <span className="navbarLink">Difficulty Examples</span>
+                    </Link>
+                  </Navbar.Text>
+
                   <Nav.Link onClick={this.props.handleLogout}>
                     <span className="navbarLink">Log out</span>
                   </Nav.Link>
@@ -100,9 +112,18 @@ class PrivateTeacherApp extends React.Component {
                   </Spinner>
                 </div>
               ) : this.state.studentsArray.length > 0 ? (
-                <StudentTable studentsArray={this.state.studentsArray} />
+                <div id="classTable">
+                  <h2 id="classAbout">
+                    Welcome to your class! Here you can monitor all of your
+                    students. 👨‍🎓
+                  </h2>
+                  <StudentTable studentsArray={this.state.studentsArray} />
+                </div>
               ) : (
-                `You don't have any students in your class yet, click add a student`
+                <div id="noStudentsMessage">
+                  You don't have any students in your class yet, click add a
+                  student
+                </div>
               )}
             </Route>
           </Switch>
