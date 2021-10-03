@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node server",
     "build": "cd react-ui/ && npm install && npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix react-ui && npm run build --prefix react-ui",
     "test": "mocha --timeout 10000"
   },
   "engines": {
