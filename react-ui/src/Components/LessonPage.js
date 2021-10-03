@@ -172,7 +172,14 @@ class LessonPage extends React.Component {
             </button>
           </div>
         ) : this.state.questionCount === 11 ? (
-          <div>Results: {this.state.correctCount} out of 10</div>
+          <div>
+            <h2 className="classAbout">
+              Well Done! You got {this.state.correctCount} out of 10{" "}
+            </h2>
+            <a href="/home">
+              <button className="button-66">Done</button>
+            </a>
+          </div>
         ) : (
           <Question
             questionCount={this.state.questionCount}
