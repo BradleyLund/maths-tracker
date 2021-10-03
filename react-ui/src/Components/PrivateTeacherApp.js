@@ -113,7 +113,7 @@ class PrivateTeacherApp extends React.Component {
                 </div>
               ) : this.state.studentsArray.length > 0 ? (
                 <div id="classTable">
-                  <h2 id="classAbout">
+                  <h2 className="classAbout">
                     Welcome to your class! Here you can monitor all of your
                     students. 👨‍🎓
                   </h2>

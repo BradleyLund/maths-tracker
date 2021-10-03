@@ -72,13 +72,17 @@ html,body {
   box-sizing: border-box;
 }
 
-#classAbout {
+.classAbout {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
   font-family: 'Inter', sans-serif !important;
   font-weight: 900 !important;
   margin-bottom: 20px;
 
+}
+
+#difficultyList {
+  margin-top: 30px;
 }
 
 

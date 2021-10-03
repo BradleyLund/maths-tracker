@@ -15,7 +15,7 @@ export default function StudentTable(props) {
       let percentage = (cumulativeScore / (totalLessons * 10)) * 100;
 
       student.cumulativeTime = cumulativeTime;
-      student.cumulativeScore = cumulativeScore;
+      student.cumulativeScore = `${cumulativeScore}/${totalLessons * 10}`;
       student.percentage = percentage;
     } else {
       student.cumulativeTime = 0;

@@ -8,9 +8,9 @@ import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 
 const difficultyExamples = {
-  1: ["1 + 3 = ", "4 - 1 = "],
-  2: ["13+15-3 = ", "27 - 9 = "],
-  3: ["3 x 21 = ", "2 x 12 = "],
+  1: ["1 + 3", "4 + 1", "6 + 5"],
+  2: ["22 + 46", "27 + 99", "39 + 63"],
+  3: ["3 x 9", "2 x 8", "7 x 7"],
 };
 
 export default function DifficultyExamples() {
@@ -23,9 +23,11 @@ export default function DifficultyExamples() {
   return (
     <Container component="main" maxWidth="xs">
       <div id="loginPage">
-        <h1>Edit Insert name here</h1>
+        <h1 className="classAbout">
+          Below you can see some example questions for each difficulty level
+        </h1>
         <form noValidate>
-          <Box sx={{ minWidth: 120 }}>
+          <Box sx={{ minWidth: 250 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">
                 Difficulty Level
@@ -43,7 +45,7 @@ export default function DifficultyExamples() {
             </FormControl>
           </Box>
         </form>
-        <ul>
+        <ul id="difficultyList">
           {
             difficultyExamples[difficultyLevel].map((example, index) => (
               <li key={index}>{example}</li>

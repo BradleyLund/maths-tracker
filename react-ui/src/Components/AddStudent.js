@@ -89,7 +89,7 @@ export default function AddStudent(props) {
           </div>
         ) : (
           <div>
-            <h1>Add a new student to your class</h1>
+            <h1 className="classAbout">Add a new student to your class</h1>
             <form noValidate>
               <TextField
                 variant="outlined"

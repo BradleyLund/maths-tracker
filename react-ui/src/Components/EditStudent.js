@@ -47,9 +47,7 @@ export default function EditStudent(props) {
   return (
     <Container component="main" maxWidth="xs">
       <div id="loginPage">
-        <h1 style={{ textAlign: "center" }}>
-          Change a student's Difficulty Level
-        </h1>
+        <h1 className="classAbout">Change a student's Difficulty Level</h1>
         <form noValidate>
           <div className="editBox">
             <Box sx={{ minWidth: 300 }}>
