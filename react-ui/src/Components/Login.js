@@ -4,10 +4,12 @@ import Container from "@material-ui/core/Container";
 import axios from "axios";
 
 export default function Login() {
+  // initialise the state of the input boxes
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [checkedOption, setCheckedOption] = useState("");
 
+  // handle change
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
@@ -67,7 +69,6 @@ export default function Login() {
               const token = response.data.token;
               window.localStorage.setItem("AuthToken", token);
               window.location.reload();
-              console.log(response.data);
             },
             (error) => {
               alert(error.response.data);
@@ -86,8 +87,6 @@ export default function Login() {
               const token = response.data.token;
               window.localStorage.setItem("AuthToken", token);
               window.location.reload();
-
-              console.log(response.data);
             },
             (error) => {
               alert(error.response.data);

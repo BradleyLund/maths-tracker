@@ -36,7 +36,6 @@ class App extends React.Component {
         })
         .then((res) => {
           // handling getting the initial data once the user is logged in
-          console.log(res.data);
           this.setState({
             username: res.data.username,
             isTeacher: res.data.isTeacher,
@@ -57,13 +56,14 @@ class App extends React.Component {
 
   handleLogout = (event) => {
     event.preventDefault();
+
+    // remove the AuthToken from localStorage when logging out
     window.localStorage.removeItem("AuthToken");
     window.location.reload();
   };
   // here we want to put if logged in then show private app otherwise show the login screen
   // we need to authorize the token properly.
   render() {
-    console.log(this.state.teacherID);
     return (
       <div id="parentDiv">
         {this.state.isLoading ? (

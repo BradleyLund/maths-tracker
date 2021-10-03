@@ -7,6 +7,7 @@ import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 
+// the different level of difficulty examples in an object
 const difficultyExamples = {
   1: ["1 + 3", "4 + 1", "6 + 5"],
   2: ["22 + 46", "27 + 99", "39 + 63"],
@@ -46,18 +47,11 @@ export default function DifficultyExamples() {
           </Box>
         </form>
         <ul id="difficultyList">
-          {
-            difficultyExamples[difficultyLevel].map((example, index) => (
-              <li key={index}>{example}</li>
-            ))
-
-            /* {console.log(difficultyExamples[difficultyLevel], difficultyLevel)} */
-          }
+          {difficultyExamples[difficultyLevel].map((example, index) => (
+            <li key={index}>{example}</li>
+          ))}
         </ul>
       </div>
     </Container>
   );
 }
-
-/* difficultyExamples[difficultyLevel].map((example) => (
-            <li>Eg</li> ))*/

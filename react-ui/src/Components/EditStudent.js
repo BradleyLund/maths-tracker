@@ -9,10 +9,12 @@ import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 
 export default function EditStudent(props) {
+  // initialise the state
   const [difficultyLevel, setDifficultyLevel] = useState("");
 
   const [studentUsername, setStudentUsername] = useState("");
 
+  // handle the changes of the input boxes
   const handleChange = (event) => {
     setDifficultyLevel(event.target.value);
   };
@@ -30,7 +32,7 @@ export default function EditStudent(props) {
       })
       .then(
         (response) => {
-          console.log(response);
+          alert(response.data);
         },
         (error) => {
           console.log(error);
@@ -55,8 +57,8 @@ export default function EditStudent(props) {
                   value={studentUsername}
                   label="Difficulty Level"
                   onChange={handleStudentChange}>
-                  {props.studentsArray.map((student) => (
-                    <MenuItem value={student.username}>
+                  {props.studentsArray.map((student, index) => (
+                    <MenuItem key={index} value={student.username}>
                       {student.username}
                     </MenuItem>
                   ))}

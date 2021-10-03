@@ -13,8 +13,8 @@ export default function LessonHistoryTable(props) {
         </tr>
       </thead>
       <tbody>
-        {props.lessonHistoryArray.map((lesson) => (
-          <tr>
+        {props.lessonHistoryArray.map((lesson, index) => (
+          <tr key={index}>
             <td>{lesson.date.split("T")[0]}</td>
             <td>{lesson.difficultyLevel}</td>
             <td>{lesson.score}/10</td>

@@ -36,8 +36,8 @@ export default function StudentTable(props) {
         </tr>
       </thead>
       <tbody>
-        {props.studentsArray.map((student) => (
-          <tr>
+        {props.studentsArray.map((student, index) => (
+          <tr key={index}>
             <td>{student.username}</td>
             <td>{student.difficultyLevel}</td>
             <td>{student.cumulativeScore}</td>

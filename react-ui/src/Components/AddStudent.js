@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 
 export default function AddStudent(props) {
+  // initialise the states
   const [firstName, setFirstName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +19,7 @@ export default function AddStudent(props) {
 
   const [difficultyLevel, setDifficultyLevel] = useState("");
 
+  // handle changes for all of the inputs
   const handleChange = (event) => {
     setDifficultyLevel(event.target.value);
   };
@@ -61,7 +63,6 @@ export default function AddStudent(props) {
         })
         .then(
           (response) => {
-            console.log(response);
             alert("The student has been successfully added to your class");
 
             setFirstName("");

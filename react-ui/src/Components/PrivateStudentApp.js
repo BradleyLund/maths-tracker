@@ -31,8 +31,7 @@ class PrivateStudentApp extends React.Component {
         },
       })
       .then((res) => {
-        console.log(res);
-        // getting the list of students once the teacher has logged in
+        // getting the list of lessons once the student has logged in and been authenticated
         this.setState({
           lessonHistoryArray: res.data.lessonHistoryArray,
           isLoading: false,
@@ -44,8 +43,6 @@ class PrivateStudentApp extends React.Component {
         this.setState({ isLoading: false });
       });
   }
-
-  // the function for handling the submition of the form
 
   render() {
     return (
@@ -77,12 +74,10 @@ class PrivateStudentApp extends React.Component {
 
           <Switch>
             <Route path="/nextlesson">
-              {/* add a student component here */}
               <LessonPage
                 username={this.props.username}
                 difficultyLevel={this.state.difficultyLevel}
               />
-              {/* <AddStudent teacherID={this.props.teacherID} /> */}
             </Route>
 
             {/* home needs to be at the bottom as the switch displays the first route that matches the link */}

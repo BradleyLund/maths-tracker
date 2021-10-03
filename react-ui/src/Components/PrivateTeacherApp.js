@@ -33,7 +33,6 @@ class PrivateTeacherApp extends React.Component {
         },
       })
       .then((res) => {
-        console.log(res);
         // getting the list of students once the teacher has logged in
         this.setState({ studentsArray: res.data });
         this.setState({ isLoading: false });
@@ -43,8 +42,6 @@ class PrivateTeacherApp extends React.Component {
         this.setState({ isLoading: false });
       });
   }
-
-  // the function for handling the submition of the form
 
   render() {
     return (
@@ -90,21 +87,16 @@ class PrivateTeacherApp extends React.Component {
 
           <Switch>
             <Route path="/addstudent">
-              {/* add a student component here */}
               <AddStudent teacherID={this.props.teacherID} />
             </Route>
             <Route path="/editstudent">
-              {/* edit a student component here */}
               <EditStudent studentsArray={this.state.studentsArray} />
             </Route>
             <Route path="/difficultyexamples">
-              {/* difficulty examples component here */}
               <DifficultyExamples />
             </Route>
             {/* home needs to be at the bottom as the switch displays the first route that matches the link */}
             <Route path="/">
-              {/* react bootstrap table here */}
-
               {this.state.isLoading ? (
                 <div id="loadingSpinner">
                   <Spinner animation="border" role="status" variant="primary">

@@ -102,7 +102,7 @@ module.exports = {
         //   no username with that name found
         res.status(401).send("no username with that name found");
       } else {
-        res.send("update successful");
+        res.send("Student difficulty level has been successfully updated");
       }
     });
   },
