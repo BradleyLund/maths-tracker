@@ -2,6 +2,7 @@ const Student = require("../models/student.model");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+// function to check the JWT that was passed in the request header and get the user Object
 function isAuthenticated(req, res) {
   let authHeader = req.headers["authorization"];
   let token = authHeader.split(" ")[1];
@@ -76,13 +77,12 @@ module.exports = {
           score: req.body.score,
           totalTime: req.body.totalTime,
         });
-        // // // save the user
+        //  save the user
         student.save(function (error, data) {
           if (error) {
             console.log(error);
             res.send("some error ocurred while adding the todo");
           } else {
-            // maybe send back in res.json (username and the todoarray? or just the todoarray)
             res.send(data.lessonHistoryArray);
           }
         });
@@ -90,6 +90,7 @@ module.exports = {
     });
   },
 
+  // a function for updating the difficulty level for a student
   changeDifficulty: function (req, res) {
     Student.findOneAndUpdate(
       { username: req.body.username },
@@ -108,10 +109,8 @@ module.exports = {
   },
 
   getTeachersClass: function (req, res) {
-    // we will have the auth token in the header here, so we send it to the isauthenticated function to get the teacher username
-    // then we find them in the teachers model and get their list of students ID's
-    // then we get each of the students data and pass it all back one time in a big object for the teacher, make an array of objects with
-    // the data from the wirefram mock up
+    // we will have the auth token in the header here, so we send it to the isauthenticated function to get the teacher ID
+    // we then find all of the data for the students with a teacher ID of the teacher
     let userObject = isAuthenticated(req, res);
     console.log(userObject);
 

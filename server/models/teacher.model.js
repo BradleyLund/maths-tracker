@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// subschema for the student id's of the student the teacher has in their class
 let studentSubSchema = mongoose.Schema({
   studentID: String,
 });
@@ -15,6 +16,7 @@ let TeacherSchema = mongoose.Schema({
 TeacherSchema.pre("save", function (next) {
   const teacher = this;
 
+  // hashing of the new password
   if (this.isModified("password") || this.isNew) {
     bcrypt.genSalt(10, function (saltError, salt) {
       if (saltError) {
@@ -49,7 +51,7 @@ TeacherSchema.methods.comparePassword = function (password, callback) {
 
 TeacherSchema.methods.getSignedJwtToken = function () {
   return jwt.sign(
-    // added the isTeacher boolean into the auth token, this might change the expected output of the auth function in the controller
+    // added the isTeacher boolean into the auth token for use on the front end to show the correct private app
     JSON.stringify({
       username: this.username,
       isTeacher: true,

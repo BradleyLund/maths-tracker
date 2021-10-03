@@ -2,6 +2,7 @@ const Teacher = require("../models/teacher.model");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+// function to verify the token and send back the userObject
 function isAuthenticated(req, res) {
   let authHeader = req.headers["authorization"];
   let token = authHeader.split(" ")[1];
@@ -47,31 +48,6 @@ module.exports = {
       } else {
         // username found and need to respond with that username already exists
         res.status(401).send("that username already exists, try another one");
-      }
-    });
-  },
-
-  getTeachersClass: function (req, res) {
-    // we will have the auth token in the header here, so we send it to the isauthenticated function to get the teacher username
-    // then we find them in the teachers model and get their list of students ID's
-    // then we get each of the students data and pass it all back one time in a big object for the teacher, make an array of objects with
-    // the data from the wirefram mock up
-
-    let userObject = isAuthenticated(req, res);
-
-    Teacher.findOne({ username: userObject.username }).exec(function (
-      error,
-      teacher
-    ) {
-      if (error) {
-        //   error with the mongoose findone function
-        res.status(401).send("error with the mongoose findone function");
-      } else if (!teacher) {
-        //   no username with that name found
-        res.status(401).send("no username with that name found");
-      } else {
-        //   found the teacher and now comparing
-        res.send(teacher.studentsArray);
       }
     });
   },

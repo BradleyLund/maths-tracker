@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 // I used a tutorial at this website to implement saving the password as a hash and implementing comparison function
 // https://coderrocketfuel.com/article/store-passwords-in-mongodb-with-node-js-mongoose-and-bcrypt
 
-// create a subschema for the todo list array, this will allow us to save the todolist item and let it have an id for deleting
+// create a subschema for the lesson History array, Allow saving of a lessonObject for each time a learner does a lesson
 let lessonHistorySubSchema = mongoose.Schema({
   date: Date,
   difficultyLevel: Number,
@@ -25,6 +25,7 @@ let StudentSchema = mongoose.Schema({
 StudentSchema.pre("save", function (next) {
   const student = this;
 
+  // check if the password is new or modified and hash it correctly for storing in the DB
   if (this.isModified("password") || this.isNew) {
     bcrypt.genSalt(10, function (saltError, salt) {
       if (saltError) {
@@ -47,6 +48,7 @@ StudentSchema.pre("save", function (next) {
   }
 });
 
+// compare password method use to check that the correct password was entered
 StudentSchema.methods.comparePassword = function (password, callback) {
   bcrypt.compare(password, this.password, function (error, isMatch) {
     if (error) {
@@ -57,6 +59,7 @@ StudentSchema.methods.comparePassword = function (password, callback) {
   });
 };
 
+// get the JWT token method for the user with important information
 StudentSchema.methods.getSignedJwtToken = function () {
   return jwt.sign(
     JSON.stringify({
