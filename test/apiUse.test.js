@@ -4,7 +4,7 @@ let request = require("request");
 
 // Test that the server is up and running
 
-describe("Backend is online responds when logging in", () => {
+describe("Backend is online and responds", () => {
   it("Backend responds to a call", function (completed) {
     request("http://localhost:5000/api", function (error, response, body) {
       expect(response.statusCode).to.equal(200);

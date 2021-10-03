@@ -26,6 +26,7 @@ app.get("/api", function (request, response) {
   response.send("Backend up and running");
 });
 
+// add in all the routes that we use
 require("./routes/newUser.js")(app);
 require("./routes/login.js")(app);
 require("./routes/authorize.js")(app);
